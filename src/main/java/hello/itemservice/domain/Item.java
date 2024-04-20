@@ -1,18 +1,22 @@
 package hello.itemservice.domain;
 
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode
+@NoArgsConstructor
 public class Item {
 
     private Long id;
-
     private String itemName;
     private Integer price;
     private Integer quantity;
-
-    public Item() {
-    }
 
     public Item(String itemName, Integer price, Integer quantity) {
         this.itemName = itemName;

@@ -19,5 +19,4 @@ public class MemoryConfig {
     public ItemRepository itemRepository() {
         return new MemoryItemRepository();
     }
-
 }

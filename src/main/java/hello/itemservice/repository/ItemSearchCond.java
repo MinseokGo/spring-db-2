@@ -1,8 +1,9 @@
 package hello.itemservice.repository;
 
 import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 public class ItemSearchCond {
 
     private String itemName;

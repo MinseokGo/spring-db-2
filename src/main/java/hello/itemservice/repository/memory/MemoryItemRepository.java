@@ -58,5 +58,4 @@ public class MemoryItemRepository implements ItemRepository {
     public void clearStore() {
         store.clear();
     }
-
 }
