@@ -2,7 +2,7 @@ package hello.itemservice.service;
 
 import hello.itemservice.domain.Item;
 import hello.itemservice.repository.ItemRepository;
-import hello.itemservice.repository.ItemSearchCond;
+import hello.itemservice.repository.ItemSearchCondition;
 import hello.itemservice.repository.ItemUpdateDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -32,7 +32,7 @@ public class ItemServiceV1 implements ItemService {
     }
 
     @Override
-    public List<Item> findItems(ItemSearchCond cond) {
+    public List<Item> findItems(ItemSearchCondition cond) {
         return itemRepository.findAll(cond);
     }
 }

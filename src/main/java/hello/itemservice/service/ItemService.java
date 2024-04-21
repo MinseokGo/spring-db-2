@@ -1,7 +1,7 @@
 package hello.itemservice.service;
 
 import hello.itemservice.domain.Item;
-import hello.itemservice.repository.ItemSearchCond;
+import hello.itemservice.repository.ItemSearchCondition;
 import hello.itemservice.repository.ItemUpdateDto;
 
 import java.util.List;
@@ -15,5 +15,5 @@ public interface ItemService {
 
     Optional<Item> findById(Long id);
 
-    List<Item> findItems(ItemSearchCond itemSearch);
+    List<Item> findItems(ItemSearchCondition itemSearch);
 }

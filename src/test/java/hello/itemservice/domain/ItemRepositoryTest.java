@@ -1,17 +1,16 @@
 package hello.itemservice.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import hello.itemservice.repository.ItemRepository;
-import hello.itemservice.repository.ItemSearchCond;
+import hello.itemservice.repository.ItemSearchCondition;
 import hello.itemservice.repository.ItemUpdateDto;
 import hello.itemservice.repository.memory.MemoryItemRepository;
+import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 class ItemRepositoryTest {
@@ -53,9 +52,9 @@ class ItemRepositoryTest {
 
         //then
         Item findItem = itemRepository.findById(itemId).get();
-        assertThat(findItem.getItemName()).isEqualTo(updateParam.getItemName());
-        assertThat(findItem.getPrice()).isEqualTo(updateParam.getPrice());
-        assertThat(findItem.getQuantity()).isEqualTo(updateParam.getQuantity());
+        assertThat(findItem.getItemName()).isEqualTo(updateParam.itemName());
+        assertThat(findItem.getPrice()).isEqualTo(updateParam.price());
+        assertThat(findItem.getQuantity()).isEqualTo(updateParam.quantity());
     }
 
     @Test
@@ -86,7 +85,7 @@ class ItemRepositoryTest {
     }
 
     void test(String itemName, Integer maxPrice, Item... items) {
-        List<Item> result = itemRepository.findAll(new ItemSearchCond(itemName, maxPrice));
+        List<Item> result = itemRepository.findAll(new ItemSearchCondition(itemName, maxPrice));
         assertThat(result).containsExactly(items);
     }
 }
