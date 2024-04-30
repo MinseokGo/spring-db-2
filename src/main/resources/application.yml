@@ -11,3 +11,12 @@ logging:
     org:
       springframework:
         jdbc: DEBUG
+    hello:
+      itemservice:
+        repository:
+          mybatis: TRACE
+
+mybatis:
+  type-aliases-package: hello.itemservice.domain
+  configuration:
+    map-underscore-to-camel-case: true  # 언더스코어를 카멜케이스로 바꿔준다.
