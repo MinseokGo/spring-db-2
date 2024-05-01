@@ -10,12 +10,18 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 @Configuration
 @RequiredArgsConstructor
 public class JdbcTemplateV3Config {
 
     private final DataSource dataSource;
+
+    @Bean
+    public DriverManagerDataSource dataSource() {
+        return new DriverManagerDataSource();
+    }
 
     @Bean
     public NamedParameterJdbcTemplate namedParameterJdbcTemplate() {
