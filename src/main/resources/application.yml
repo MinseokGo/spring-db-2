@@ -15,6 +15,11 @@ logging:
       itemservice:
         repository:
           mybatis: TRACE
+    hibernate:
+      SQL: DEBUG
+      orm:
+        jdbc:
+          bind: TRACE
 
 mybatis:
   type-aliases-package: hello.itemservice.domain

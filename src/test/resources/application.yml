@@ -11,6 +11,11 @@ logging:
     org:
       springframework:
         jdbc: DEBUG
+      hibernate:
+        SQL: DEBUG
+        orm:
+          jdbc:
+            bind: TRACE
   hello:
     itemservice:
       repository:
