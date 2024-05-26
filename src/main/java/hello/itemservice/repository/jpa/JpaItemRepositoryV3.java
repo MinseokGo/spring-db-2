@@ -29,12 +29,14 @@ public class JpaItemRepositoryV3 implements ItemRepository {
     }
 
     @Override
+    @Transactional
     public Item save(Item item) {
         entityManager.persist(item);
         return item;
     }
 
     @Override
+    @Transactional
     public void update(Long id, ItemUpdateDto updateParam) {
         Item item = entityManager.find(Item.class, id);
         item.setItemName(updateParam.itemName());
