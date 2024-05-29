@@ -2,7 +2,6 @@ package hello.itemservice.repository.jpa;
 
 import static hello.itemservice.domain.QItem.item;
 
-import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import hello.itemservice.domain.Item;
@@ -73,24 +72,5 @@ public class JpaItemRepositoryV3 implements ItemRepository {
             return item.price.loe(maxPrice);
         }
         return null;
-    }
-
-    public List<Item> findAllOld(ItemSearchCondition condition) {
-        String itemName = condition.itemName();
-        Integer maxPrice = condition.maxPrice();
-
-        // QItem item = QItem.item;
-        BooleanBuilder booleanBuilder = new BooleanBuilder();
-        if (StringUtils.hasText(itemName)) {
-            booleanBuilder.and(item.itemName.like("%" + itemName + "%"));
-        }
-        if (maxPrice != null) {
-            booleanBuilder.and(item.price.loe(maxPrice));
-        }
-
-        return queryFactory.select(item)
-                .from(item)
-                .where(booleanBuilder)
-                .fetch();
     }
 }
