@@ -6,19 +6,16 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import hello.itemservice.domain.Item;
 import hello.itemservice.repository.ItemSearchCondition;
-import jakarta.persistence.EntityManager;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
 @Repository
+@RequiredArgsConstructor
 public class ItemQueryRepositoryV2 {
 
     private final JPAQueryFactory queryFactory;
-
-    public ItemQueryRepositoryV2(EntityManager entityManager) {
-        this.queryFactory = new JPAQueryFactory(entityManager);
-    }
 
     public List<Item> findAll(ItemSearchCondition condition) {
         return queryFactory.select(item)
