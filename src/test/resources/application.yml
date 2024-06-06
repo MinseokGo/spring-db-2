@@ -1,18 +1,19 @@
 spring:
   profiles:
     active: test
-#  datasource:
-#    url: jdbc:h2:tcp://localhost/~/testcase
-#    username: sa
-#    password:
 
 logging:
   level:
     org:
       springframework:
-        jdbc: DEBUG
+        jdbc:
+          datasource:
+            DataSourceTransactionManager: DEBUG
         transaction:
           interceptor: TRACE
+        orm:
+          jpa:
+            JpaTransactionManager: DEBUG
       hibernate:
         SQL: DEBUG  # 로그를 통해 쿼리 출력
         type:
@@ -21,6 +22,8 @@ logging:
         orm:
           jdbc:
             bind: TRACE # 쿼리의 ? 에 실제 바인딩 되는 데이터 로그 출력
+        resource:
+          transaction: DEBUG
   hello:
     itemservice:
       repository:
