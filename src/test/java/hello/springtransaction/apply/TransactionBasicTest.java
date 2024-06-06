@@ -40,7 +40,6 @@ class TransactionBasicTest {
         }
     }
 
-    @Slf4j
     static class BasicService {
 
         @Transactional

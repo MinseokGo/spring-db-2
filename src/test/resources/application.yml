@@ -11,11 +11,16 @@ logging:
     org:
       springframework:
         jdbc: DEBUG
+        transaction:
+          interceptor: TRACE
       hibernate:
-        SQL: DEBUG
+        SQL: DEBUG  # 로그를 통해 쿼리 출력
+        type:
+          descriptor:
+            sql: TRACE
         orm:
           jdbc:
-            bind: TRACE
+            bind: TRACE # 쿼리의 ? 에 실제 바인딩 되는 데이터 로그 출력
   hello:
     itemservice:
       repository:
