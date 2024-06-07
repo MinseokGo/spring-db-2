@@ -20,7 +20,7 @@ class RollbackTest {
     @Test
     void runtimeException() {
         assertThatThrownBy(rollbackService::runtimeException)
-                        .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(RuntimeException.class);
     }
 
     @Test
@@ -63,7 +63,7 @@ class RollbackTest {
 
         // 체크 예외 rollbackFor 지정: 롤백
         @Transactional(rollbackFor = MyException.class)
-        public  void rollbackFor() throws MyException {
+        public void rollbackFor() throws MyException {
             log.info("call rollbackFor");
             throw new MyException();
         }

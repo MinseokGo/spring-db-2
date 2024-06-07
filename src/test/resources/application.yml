@@ -1,6 +1,12 @@
 spring:
   profiles:
     active: test
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        format_sql: TRUE
 
 logging:
   level:
