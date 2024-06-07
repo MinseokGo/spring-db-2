@@ -65,6 +65,22 @@ class BasicTransactionTest {
         transactionManager.rollback(transaction2);
     }
 
+    @Test
+    void inner_commit() {
+        log.info("외부 트랜잭션 시작");
+        TransactionStatus outer = transactionManager.getTransaction(new DefaultTransactionAttribute());
+        log.info("outer.isNewTransaction()={}", outer.isNewTransaction());
+
+        log.info("내부 트랜잭션 시작");
+        TransactionStatus inner = transactionManager.getTransaction(new DefaultTransactionAttribute());
+        log.info("inner.isNewTransaction()={}", inner.isNewTransaction());
+        log.info("내부 트랜잭션 커밋");
+        transactionManager.commit(inner);   // 내부 트랜잭션에서는 커밋을 해도 동작을 하지 않는다.
+
+        log.info("외부 트랜잭션 커밋");
+        transactionManager.commit(outer);   // 내부 트랜잭션에서 롤백 시, 트랜잭션이 마킹되어 해당 트랜잭션을 재사용할 수 없게 된다.
+    }
+
     @TestConfiguration
     static class Config {
 
