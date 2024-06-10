@@ -57,4 +57,22 @@ class MemberServiceTest {
         assertTrue(memberRepository.findByName(name).isPresent());
         assertTrue(logRepository.findByMessage(name).isEmpty());
     }
+
+    /**
+     * memberService        @Transactional: ON
+     * memberRepository     @Transactional: OFF
+     * logRepository        @Transactional: OFF
+     */
+    @Test
+    void singleTransaction() {
+        // given
+        String name = "outerTransactionOff_success";
+
+        // when
+        memberService.joinV1(name);
+
+        // then
+        assertTrue(memberRepository.findByName(name).isPresent());
+        assertTrue(logRepository.findByMessage(name).isPresent());
+    }
 }
