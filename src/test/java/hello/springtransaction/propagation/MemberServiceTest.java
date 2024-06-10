@@ -66,7 +66,7 @@ class MemberServiceTest {
     @Test
     void singleTransaction() {
         // given
-        String name = "outerTransactionOff_success";
+        String name = "singleTransaction";
 
         // when
         memberService.joinV1(name);
@@ -74,5 +74,42 @@ class MemberServiceTest {
         // then
         assertTrue(memberRepository.findByName(name).isPresent());
         assertTrue(logRepository.findByMessage(name).isPresent());
+    }
+
+    /**
+     * memberService        @Transactional: ON
+     * memberRepository     @Transactional: ON
+     * logRepository        @Transactional: ON
+     */
+    @Test
+    void outerTransactionOn_success() {
+        // given
+        String name = "outerTransactionOn_success";
+
+        // when
+        memberService.joinV1(name);
+
+        // then
+        assertTrue(memberRepository.findByName(name).isPresent());
+        assertTrue(logRepository.findByMessage(name).isPresent());
+    }
+
+    /**
+     * memberService        @Transactional: OFF
+     * memberRepository     @Transactional: ON
+     * logRepository        @Transactional: ON Exception
+     */
+    @Test
+    void outerTransactionOn_fail() {
+        // given
+        String name = "로그 예외_outerTransactionOn_fail";
+
+        // when
+        assertThatThrownBy(() -> memberService.joinV1(name))
+                .isInstanceOf(RuntimeException.class);
+
+        // then
+        assertTrue(memberRepository.findByName(name).isEmpty());
+        assertTrue(logRepository.findByMessage(name).isEmpty());
     }
 }
