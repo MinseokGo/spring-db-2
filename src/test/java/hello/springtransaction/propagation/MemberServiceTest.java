@@ -1,5 +1,6 @@
 package hello.springtransaction.propagation;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import lombok.extern.slf4j.Slf4j;
@@ -36,5 +37,24 @@ class MemberServiceTest {
         // then
         assertTrue(memberRepository.findByName(name).isPresent());
         assertTrue(logRepository.findByMessage(name).isPresent());
+    }
+
+    /**
+     * memberService        @Transactional: OFF
+     * memberRepository     @Transactional: ON
+     * logRepository        @Transactional: ON Exception
+     */
+    @Test
+    void outerTransactionOff_fail() {
+        // given
+        String name = "로그 예외_outerTransactionOff_success";
+
+        // when
+        assertThatThrownBy(() -> memberService.joinV1(name))
+                .isInstanceOf(RuntimeException.class);
+
+        // then
+        assertTrue(memberRepository.findByName(name).isPresent());
+        assertTrue(logRepository.findByMessage(name).isEmpty());
     }
 }
